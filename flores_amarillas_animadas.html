@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Para ti 🌻</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#05030a;font-family:Georgia,serif}
+body{touch-action:manipulation}
+
+.scene{
+  position:fixed;inset:-8%;
+  transform-style:preserve-3d;
+  transition:transform .18s ease-out;
+  will-change:transform;
+}
+.layer{position:absolute;inset:0;pointer-events:none;transform-style:preserve-3d}
+.bg{
+  background:
+    radial-gradient(circle at 50% 42%,rgba(255,194,69,.16),transparent 27%),
+    radial-gradient(circle at 18% 20%,rgba(255,214,95,.09),transparent 20%),
+    linear-gradient(150deg,#05030a 0%,#10091a 48%,#21100c 100%);
+}
+.glow{
+  background:radial-gradient(circle at 50% 48%,rgba(255,196,56,.14),transparent 32%);
+  filter:blur(10px);
+}
+.stars{background-image:
+ radial-gradient(circle,rgba(255,235,164,.75) 0 1px,transparent 1.5px),
+ radial-gradient(circle,rgba(255,255,255,.35) 0 1px,transparent 1.5px);
+ background-size:83px 97px,137px 121px;
+ opacity:.45;
+ animation:twinkle 4s ease-in-out infinite alternate;
+}
+@keyframes twinkle{to{opacity:.18;transform:scale(1.02)}}
+
+.moon{
+ position:absolute;width:115px;height:115px;border-radius:50%;
+ right:9%;top:9%;
+ background:radial-gradient(circle at 35% 30%,#fff4bd,#ffd76b 55%,#d8912e);
+ box-shadow:0 0 55px rgba(255,205,83,.35);
+ opacity:.72;
+}
+.ground{
+ position:absolute;left:-10%;right:-10%;bottom:-15%;height:43%;
+ background:radial-gradient(ellipse at 50% 0%,rgba(91,45,19,.8),transparent 52%),
+ linear-gradient(to top,#070307 5%,rgba(16,7,10,.9) 58%,transparent);
+}
+
+.flowers{position:absolute;inset:0}
+.flower{
+ position:absolute;font-size:clamp(48px,10vw,92px);
+ filter:drop-shadow(0 0 13px rgba(255,196,48,.28));
+ animation:sway 4s ease-in-out infinite;
+ transform-origin:50% 100%;
+}
+.flower:nth-child(1){left:5%;bottom:9%;animation-delay:-1s}
+.flower:nth-child(2){left:18%;bottom:3%;font-size:70px;animation-delay:-2.2s}
+.flower:nth-child(3){right:8%;bottom:7%;font-size:105px;animation-delay:-.6s}
+.flower:nth-child(4){right:23%;bottom:1%;font-size:62px;animation-delay:-3s}
+.flower:nth-child(5){left:42%;bottom:-2%;font-size:82px;animation-delay:-1.7s}
+@keyframes sway{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(3deg) translateY(-8px)}}
+
+.petal{
+ position:absolute;top:-12vh;font-size:22px;opacity:.75;
+ animation:fall linear infinite;
+}
+.petal:nth-child(1){left:8%;animation-duration:7s;animation-delay:-1s}
+.petal:nth-child(2){left:27%;animation-duration:9s;animation-delay:-5s}
+.petal:nth-child(3){left:49%;animation-duration:8s;animation-delay:-3s}
+.petal:nth-child(4){left:70%;animation-duration:10s;animation-delay:-7s}
+.petal:nth-child(5){left:88%;animation-duration:7.5s;animation-delay:-4s}
+@keyframes fall{
+ 0%{transform:translate3d(0,-10vh,0) rotate(0);opacity:0}
+ 12%{opacity:.8} 50%{transform:translate3d(45px,55vh,0) rotate(180deg)}
+ 100%{transform:translate3d(-35px,115vh,0) rotate(360deg);opacity:0}
+}
+
+.card{
+ position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+ width:min(88vw,520px);padding:30px 24px 34px;text-align:center;
+ color:#fff8df;
+ border:1px solid rgba(255,215,120,.18);
+ border-radius:28px;
+ background:rgba(9,5,13,.30);
+ backdrop-filter:blur(4px);
+ box-shadow:0 15px 80px rgba(0,0,0,.35);
+}
+h1{margin:0 0 12px;font-size:clamp(34px,9vw,62px);font-weight:400;color:#ffd75c;text-shadow:0 0 25px rgba(255,191,43,.3)}
+p{margin:0 auto;max-width:420px;font-size:clamp(16px,4.4vw,21px);line-height:1.65;text-shadow:0 2px 12px #000}
+.heart{display:inline-block;color:#ff6f91;animation:beat 1.3s infinite}
+@keyframes beat{50%{transform:scale(1.18)}}
+
+.hint{
+ position:absolute;bottom:6%;left:50%;transform:translateX(-50%);
+ color:rgba(255,239,192,.8);font:14px Arial,sans-serif;
+ padding:11px 17px;border:1px solid rgba(255,220,130,.2);
+ border-radius:999px;background:rgba(0,0,0,.22);backdrop-filter:blur(5px);
+}
+button{
+ margin-top:20px;border:1px solid rgba(255,218,112,.45);color:#fff2b6;
+ background:rgba(255,190,45,.12);border-radius:999px;padding:11px 18px;
+ font-size:14px;cursor:pointer;
+}
+#touchHearts{position:fixed;inset:0;pointer-events:none;z-index:20}
+.pop{position:absolute;font-size:25px;animation:pop 1.2s ease-out forwards}
+@keyframes pop{0%{transform:translate(-50%,-50%) scale(.4);opacity:0}20%{opacity:1}100%{transform:translate(-50%,-150px) scale(1.3);opacity:0}}
+</style>
+</head>
+<body>
+
+<div class="scene" id="scene">
+  <div class="layer bg"></div>
+  <div class="layer glow"></div>
+  <div class="layer stars"></div>
+  <div class="layer" id="depth">
+    <div class="moon"></div>
+    <div class="flowers">
+      <div class="flower">🌻</div><div class="flower">🌻</div>
+      <div class="flower">🌻</div><div class="flower">🌻</div>
+      <div class="flower">🌻</div>
+    </div>
+    <div class="ground"></div>
+  </div>
+
+  <div class="card" id="card">
+    <h1>Para ti <span class="heart">♥</span></h1>
+    <p>
+      Hice este pequeño rincón para ti.<br>
+      Porque algunas personas merecen<br>
+      un lugar bonito, incluso en una pantalla. 🌻
+    </p>
+    <button id="motionBtn">Activar movimiento 360°</button>
+  </div>
+
+  <div class="layer" id="petals">
+    <div class="petal">🌼</div><div class="petal">🌼</div>
+    <div class="petal">🌼</div><div class="petal">🌼</div><div class="petal">🌼</div>
+  </div>
+</div>
+
+<div class="hint">Mueve tu celular o toca la pantalla ✨</div>
+<div id="touchHearts"></div>
+
+<script>
+const scene=document.getElementById('scene');
+const depth=document.getElementById('depth');
+const card=document.getElementById('card');
+const btn=document.getElementById('motionBtn');
+const touchHearts=document.getElementById('touchHearts');
+
+function parallax(x,y){
+  const rx=Math.max(-9,Math.min(9,y*9));
+  const ry=Math.max(-12,Math.min(12,x*12));
+  scene.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg) scale(1.06)`;
+  depth.style.transform=`translate3d(${x*18}px,${y*12}px,45px)`;
+  card.style.transform=`translate(calc(-50% + ${x*-7}px),calc(-50% + ${y*-5}px)) translateZ(80px)`;
+}
+
+window.addEventListener('deviceorientation',e=>{
+  const x=(e.gamma||0)/45;
+  const y=((e.beta||0)-45)/45;
+  parallax(x,y);
+},{passive:true});
+
+let dragging=false;
+let lastX=0,lastY=0;
+window.addEventListener('pointerdown',e=>{dragging=true;lastX=e.clientX;lastY=e.clientY});
+window.addEventListener('pointermove',e=>{
+  if(!dragging)return;
+  const x=(e.clientX-innerWidth/2)/(innerWidth/2);
+  const y=(e.clientY-innerHeight/2)/(innerHeight/2);
+  parallax(x,y);
+});
+window.addEventListener('pointerup',()=>dragging=false);
+
+btn.addEventListener('click',async()=>{
+  try{
+    if(typeof DeviceOrientationEvent!=='undefined' &&
+       typeof DeviceOrientationEvent.requestPermission==='function'){
+      const p=await DeviceOrientationEvent.requestPermission();
+      if(p!=='granted'){alert('Permite el movimiento desde los ajustes del navegador.');return;}
+    }
+    btn.textContent='Movimiento 360° activado ✓';
+    btn.style.opacity='.65';
+  }catch(err){btn.textContent='Mueve el celular para verlo ✨';}
+});
+
+window.addEventListener('pointerdown',e=>{
+  if(e.target===btn)return;
+  const h=document.createElement('div');
+  h.className='pop';h.textContent=['❤️','💛','♡','🌼'][Math.floor(Math.random()*4)];
+  h.style.left=e.clientX+'px';h.style.top=e.clientY+'px';
+  touchHearts.appendChild(h);
+  setTimeout(()=>h.remove(),1200);
+});
+</script>
+</body>
+</html>
