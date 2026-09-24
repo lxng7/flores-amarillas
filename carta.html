@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para usted, mi Fernandita ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: radial-gradient(circle at top, #3b1635, #160b1d 60%, #08060c);
+    color: white;
+    font-family: Georgia, serif;
+    overflow-x: hidden;
+}
+
+.pantalla {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 25px;
+}
+
+.inicio {
+    animation: aparecer 2s ease;
+}
+
+h1 {
+    font-size: 38px;
+    font-weight: normal;
+    margin-bottom: 12px;
+}
+
+.subtitulo {
+    color: #e8b9d8;
+    font-size: 17px;
+    margin-bottom: 35px;
+}
+
+.boton {
+    border: none;
+    padding: 15px 28px;
+    border-radius: 30px;
+    background: #ffffff;
+    color: #4b1c43;
+    font-size: 17px;
+    cursor: pointer;
+    box-shadow: 0 0 25px rgba(255,255,255,.25);
+}
+
+.carta {
+    display: none;
+    max-width: 650px;
+    width: 100%;
+    padding: 30px 22px 50px;
+    animation: aparecer 2s ease;
+}
+
+.carta h2 {
+    font-size: 32px;
+    font-weight: normal;
+    margin-bottom: 25px;
+}
+
+.texto {
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 22px;
+    padding: 28px 23px;
+    line-height: 1.8;
+    font-size: 17px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.25);
+}
+
+.final {
+    margin-top: 35px;
+    font-size: 21px;
+    color: #f4c5df;
+    line-height: 1.6;
+}
+
+.corazon {
+    position: fixed;
+    bottom: -30px;
+    font-size: 20px;
+    animation: subir 7s linear infinite;
+    opacity: .7;
+    pointer-events: none;
+}
+
+@keyframes subir {
+    from {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    20% {
+        opacity: .8;
+    }
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="pantalla" id="inicio">
+    <div class="inicio">
+        <div style="font-size:45px;">🌙</div>
+
+        <h1>Para usted, mi Fernandita</h1>
+
+        <p class="subtitulo">
+            Tengo algo que quiero decirle...
+        </p>
+
+        <button class="boton" onclick="abrirCarta()">
+            Abrir mi carta ❤️
+        </button>
+    </div>
+</div>
+
+<div class="pantalla">
+    <div class="carta" id="carta">
+
+        <div style="font-size:45px;">💌</div>
+
+        <h2>Para el amor de mi vida</h2>
+
+        <div class="texto">
+
+            <p>
+            No sé exactamente cómo empezar esta carta,
+            porque siento que ninguna palabra alcanza para
+            explicar todo lo que siento por usted.
+            Pero quiero intentarlo, porque hay cosas que
+            muchas veces siento y quizá no le digo lo suficiente.
+            </p>
+
+            <p>
+            Quiero que sepa que la amo muchísimo.
+            Amo su forma de ser, su manera de quererme,
+            sus detalles, sus locuras y hasta esas pequeñas
+            cosas que quizá usted considera defectos,
+            pero que para mí también forman parte de la mujer que amo.
+            </p>
+
+            <p>
+            Gracias por quedarse conmigo incluso en los días
+            en los que no soy la mejor versión de mí.
+            Gracias por tenerme paciencia, por escucharme,
+            por apoyarme y por hacerme sentir querido.
+            </p>
+
+            <p>
+            Valoro muchísimo que esté a mi lado en los momentos
+            buenos y también en los malos.
+            </p>
+
+            <p>
+            Sé que no somos perfectos y que seguramente
+            tendremos días difíciles, pero hay algo que sí tengo claro:
+            quiero seguir construyendo nuestra historia con usted.
+            </p>
+
+            <p>
+            Quiero que todas esas promesas que nos hemos hecho
+            algún día dejen de ser solamente palabras y se conviertan
+            en recuerdos que podamos mirar juntos.
+            </p>
+
+            <p>
+            Si algún día duda de lo que siento por usted,
+            vuelva a leer esto y recuerde que, entre tantas personas
+            en este mundo, yo la sigo eligiendo a usted.
+            </p>
+
+            <p>
+            La amo por quien es, por quien es conmigo y por todo
+            lo que todavía nos falta vivir.
+            </p>
+
+        </div>
+
+        <div class="final">
+            Te elegiría una y mil veces más. ❤️
+            <br><br>
+            De aquí hasta el infinito y más allá. 🌙
+            <br><br>
+            Con todo mi amor, siempre.
+        </div>
+
+    </div>
+</div>
+
+<script>
+function abrirCarta() {
+
+    document.getElementById("inicio").style.display = "none";
+
+    document.getElementById("carta").style.display = "block";
+
+    crearCorazones();
+}
+
+function crearCorazones() {
+
+    setInterval(function() {
+
+        const corazon = document.createElement("div");
+
+        corazon.className = "corazon";
+        corazon.innerHTML = Math.random() > .5 ? "❤️" : "♡";
+
+        corazon.style.left = Math.random() * 100 + "vw";
+        corazon.style.animationDuration =
+            (5 + Math.random() * 4) + "s";
+
+        document.body.appendChild(corazon);
+
+        setTimeout(function() {
+            corazon.remove();
+        }, 9000);
+
+    }, 700);
+}
+</script>
+
+</body>
+</html>
